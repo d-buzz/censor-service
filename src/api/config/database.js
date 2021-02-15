@@ -7,4 +7,4 @@ const db = mysql.createConnection({
   database : 'dbuzz_censored'
 })
 
-module.exports = { db }
+module.exports = { db, mysql }
