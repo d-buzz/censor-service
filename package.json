@@ -1,0 +1,23 @@
+{
+  "name": "express-js-starter",
+  "version": "1.0.0",
+  "description": "Express JS starter",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stinkymonkeyph/express-js-starter.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stinkymonkeyph/express-js-starter/issues"
+  },
+  "homepage": "https://github.com/stinkymonkeyph/express-js-starter#readme",
+  "dependencies": {
+    "@hiveio/hive-js": "^0.8.13",
+    "express": "^4.17.1"
+  }
+}
