@@ -1,5 +1,5 @@
 const { Router } = require('express')
-const { censor } = require('../controllers/censorController')
+const { censor } = require('@controllers/censorController')
 
 const censorRouter = Router()
 

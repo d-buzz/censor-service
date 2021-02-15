@@ -16,10 +16,18 @@
     "url": "https://github.com/stinkymonkeyph/express-js-starter/issues"
   },
   "homepage": "https://github.com/stinkymonkeyph/express-js-starter#readme",
+  "_moduleAliases": {
+    "@config": "src/api/config",
+    "@controllers": "src/api/controllers",
+    "@routes": "src/api/routes",
+    "@database": "src/api/database"
+  },
   "dependencies": {
     "@hiveio/hive-js": "^0.8.13",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "module-alias": "^2.2.2",
+    "mysql": "github:mysqljs/mysql"
   }
 }
