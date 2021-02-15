@@ -15,7 +15,7 @@ const censor = (req, res) => {
   const { author, permlink, type: type_id, signature } = req.body
   const verified = verify(author, permlink, type_id, signature)
   
-  if(!verified) return res.json({ pair })
+  if(!verified) return res.sendStatus(401)
 
   const CURRENT_TIMESTAMP = mysql.raw('CURRENT_TIMESTAMP()')
   const COLUMNS = { author, permlink, type_id, created_at: CURRENT_TIMESTAMP, updated_at: CURRENT_TIMESTAMP }
