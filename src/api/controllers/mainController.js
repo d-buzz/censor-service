@@ -33,9 +33,7 @@ const types = (req, res) => {
 }
 
 const keypair = (req, res) => {
-  res.json({ pair: {
-    private: pair['private']
-  } })
+  res.json({pair: { private: pair['private'] }})
 }
 
 module.exports = { censor, types, keypair }
