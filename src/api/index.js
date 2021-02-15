@@ -2,7 +2,6 @@ const express = require('express')
 const api = express()
 
 const { db, mysql } = require('@config/database')
-const { auth } = require('@hiveio/hive-js')
 
 const mainRouter = require('@routes/mainRouter')
 const crypto = require("crypto")

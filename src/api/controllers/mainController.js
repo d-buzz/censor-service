@@ -1,5 +1,4 @@
 
-
 const verify = (author, permlink, type, signature) => {
   const transaction = {author, permlink, type, wif: identity}
 
@@ -34,7 +33,9 @@ const types = (req, res) => {
 }
 
 const keypair = (req, res) => {
-  res.json({ pair })
+  res.json({ pair: {
+    private: pair['private']
+  } })
 }
 
 module.exports = { censor, types, keypair }
