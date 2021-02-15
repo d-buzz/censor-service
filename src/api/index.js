@@ -4,8 +4,8 @@ const api = express()
 const { db, mysql } = require('@config/database')
 
 const mainRouter = require('@routes/mainRouter')
-const crypto = require("crypto")
-const keypair = require("keypair")
+const crypto = require('crypto')
+const keypair = require('keypair')
 const pair = keypair(1024)
 const identity = '5Jmt1Gbj79xfGpMfmn64MH3k5xafJuMqxcc81T9KBnM1VGyzZaN'
 
