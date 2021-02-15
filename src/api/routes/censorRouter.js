@@ -3,6 +3,6 @@ const { censor } = require('../controllers/censorController')
 
 const censorRouter = Router()
 
-censorRouter.get('/buzz', censor)
+censorRouter.post('/buzz', censor)
 
 module.exports = censorRouter
