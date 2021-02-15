@@ -1,16 +1,28 @@
 
+const verify = (author, permlink, type, signature) => {
+  const transaction = {author, permlink, type, wif: identity}
+
+  const verifierObject = crypto.createVerify("RSA-SHA512")
+  verifierObject.update(JSON.stringify(transaction))
+
+  const verified = verifierObject.verify(keypair["public"], signature, "base64")
+  console.log({ verified })
+  return verified
+}
+
 
 const censor = (req, res) => {
-  const { author, permlink, type: type_id, wif = null } = req.body
+  const { author, permlink, type: type_id, signature } = req.body
+  const verified = verify(author, permlink, type_id, signature)
   
-  if(identity !== wif) return res.sendStatus(401)
+  if(!verified) return res.sendStatus(401)
 
   const CURRENT_TIMESTAMP = mysql.raw('CURRENT_TIMESTAMP()')
   const COLUMNS = { author, permlink, type_id, created_at: CURRENT_TIMESTAMP, updated_at: CURRENT_TIMESTAMP }
 
   db.query('INSERT INTO LINKS SET ?', COLUMNS , (error, results) => {
     if(error) res.sendStatus(500)
-    res.json({ wif, results, author, permlink })
+    res.json({ verified, results, author, permlink })
   })
 
 }

@@ -5,11 +5,26 @@ const { db, mysql } = require('@config/database')
 const { auth } = require('@hiveio/hive-js')
 
 const mainRouter = require('@routes/mainRouter')
-const identity = auth.toWif('dbuzz', '5K8FC6woU1Y2LauGeXb41Ur1LrjqsKUskmqN3CWBzPinwJ91DME', 'posting')
+
+const crypto = require("crypto")
+const keypair = require("keypair")
+const pair = keypair(1024)
+const identity = '5Jmt1Gbj79xfGpMfmn64MH3k5xafJuMqxcc81T9KBnM1VGyzZaN'
+
 
 global.db = db
 global.mysql = mysql
+global.keypair = pair
 global.identity = identity
+global.crypto = crypto
+
+const transaction = {author: 'someauthor', permlink: 'somepermlink', type: 1, wif: identity}
+
+const signerObject = crypto.createSign("RSA-SHA512")
+signerObject.update(JSON.stringify(transaction))
+const signature = signerObject.sign(pair["private"], "base64")
+
+console.log({ signature })
 
 db.connect()
 api.use('/', mainRouter)
