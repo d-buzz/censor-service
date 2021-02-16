@@ -23,7 +23,7 @@ const censor = (req, res) => {
   const CURRENT_TIMESTAMP = mysql.raw('CURRENT_TIMESTAMP()')
   const COLUMNS = { author, permlink, type_id, created_at: CURRENT_TIMESTAMP, updated_at: CURRENT_TIMESTAMP }
 
-  addReply(author, permlink)
+  addReply(author, permlink, type_id) 
 
   db.query('INSERT INTO LINKS SET ?', COLUMNS , (error, results) => {
     if(error) return res.sendStatus(500)
@@ -65,8 +65,15 @@ const createPermlink = (title) => {
 }
 
 
-const addReply = (parent_author, parent_permlink) => {
-  let body = `This buzz has been marked as censored on [d.buzz](https://d.buzz)`
+const addReply = (parent_author, parent_permlink, type) => {
+  let reason = ''
+  if(type === 1) {
+    reason = '<b>Child Pornography</b>'
+  } else {
+    reason = '<b>Blatant Scam</b>'
+  }
+
+  let body = `This buzz has been marked as ${reason} on [d.buzz](https://d.buzz)`
   const json_metadata = createMeta()
   let permlink = createPermlink(body.substring(0, 100))
   permlink = `re-${permlink}`
