@@ -6,6 +6,7 @@ const verify = (author, permlink, type, signature) => {
   verifierObject.update(JSON.stringify(transaction))
 
   const verified = verifierObject.verify(pair["public"], signature, "base64")
+  console.log({ verified })
  
   return verified
 }
@@ -36,4 +37,11 @@ const keypair = (req, res) => {
   res.json({pair: { private: pair['private'] }})
 }
 
-module.exports = { censor, types, keypair }
+const list = (req, res) => {
+  db.query('SELECT * FROM LINKS', (error, results) => {
+    if(error) throw error
+    res.json(results)
+  })
+}
+
+module.exports = { censor, types, keypair, list }
