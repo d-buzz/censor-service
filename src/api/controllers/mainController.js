@@ -15,7 +15,7 @@ const censor = (req, res) => {
   const { author, permlink, type: type_id, signature } = req.body
   const verified = verify(author, permlink, type_id, signature)
   
-  if(!verified) return res.sendStatus(401)
+  if(!verified) return res.status(401).json({ message: 'invalid signature' })
 
   const CURRENT_TIMESTAMP = mysql.raw('CURRENT_TIMESTAMP()')
   const COLUMNS = { author, permlink, type_id, created_at: CURRENT_TIMESTAMP, updated_at: CURRENT_TIMESTAMP }
@@ -38,7 +38,7 @@ const keypair = (req, res) => {
 }
 
 const list = (req, res) => {
-  db.query('SELECT * FROM LINKS', (error, results) => {
+  db.query('SELECT a.*, b.name as type FROM LINKS a, TYPES b WHERE a.type_id = b.id', (error, results) => {
     if(error) throw error
     res.json(results)
   })
